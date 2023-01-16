@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-final class FrameworkGridViewModel: ObservableObject {
+final class FrameworkListViewModel: ObservableObject {
     
     var selectedFramework: Framework? {
         didSet { isShowingDetailsView = true }
@@ -16,8 +16,6 @@ final class FrameworkGridViewModel: ObservableObject {
     @Published var isShowingDetailsView: Bool = false
     
     let frameColumns: [GridItem] = [
-        GridItem(.flexible()),
-        GridItem(.flexible()),
         GridItem(.flexible())
     ]
 }

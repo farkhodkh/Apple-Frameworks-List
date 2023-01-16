@@ -14,13 +14,6 @@ struct FrameworkDetailView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                
-                Spacer()
-                
-                SFXDismissButton(isShowingDetailView: $isShowingDetailView)
-            }
-            .padding()
             
             Spacer()
             

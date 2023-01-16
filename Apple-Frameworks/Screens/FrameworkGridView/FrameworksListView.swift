@@ -7,36 +7,36 @@
 
 import SwiftUI
 
-struct FrameworksGridView: View {
+struct FrameworksListView: View {
     
-    @StateObject var viewModel: FrameworkGridViewModel = FrameworkGridViewModel()
+    @StateObject var viewModel: FrameworkListViewModel = FrameworkListViewModel()
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                LazyVGrid(columns: viewModel.frameColumns) {
-                    ForEach(MockData.frameworks) {framework in
+            
+            List {
+                ForEach(MockData.frameworks) {framework in
+                    NavigationLink(destination: FrameworkDetailView(
+                        framework: viewModel.selectedFramework ?? MockData.sampleFramework,
+                        isShowingDetailView: $viewModel.isShowingDetailsView
+                    )) {
                         FrameworkTitleView(framework: framework)
                             .onTapGesture {
                                 viewModel.selectedFramework = framework
                             }
                     }
+                    
                 }
             }
             .navigationTitle("🍎 Frameworks")
-            .sheet(isPresented: $viewModel.isShowingDetailsView) {
-                FrameworkDetailView(
-                    framework: viewModel.selectedFramework ?? MockData.sampleFramework,
-                    isShowingDetailView: $viewModel.isShowingDetailsView
-                )
-            }
         }
+        .accentColor(Color(.label))
         
     }
 }
 
 struct FrameworksGridView_Previews: PreviewProvider {
     static var previews: some View {
-        FrameworksGridView()
+        FrameworksListView()
     }
 }
